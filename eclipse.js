@@ -121,7 +121,6 @@ function performClick() {
             element.dispatchEvent(mouseUpEvent);
             element.dispatchEvent(clickEvent);
             clickCount++;
-            console.log(`[${getCurrentTime()}] 点击位置: (${pos.x}, ${pos.y}), 点击次数: ${clickCount}, 按住时长: ${holdDuration}ms`);
             // 定时器执行完后从数组中移除
             const index = activeTimers.indexOf(timerId);
             if (index > -1) {
@@ -151,12 +150,8 @@ function startClickSession() {
                 timeConfig.pause.minDuration,
                 timeConfig.pause.maxDelay
             ) * 1000;
-            
-            console.log(`完成一轮点击，休息 ${pauseDuration/1000} 秒`);
-            
             const timerId = setTimeout(() => {
                 if (isRunning) {
-                    console.log('休息结束，开始新一轮点击');
                     startClickSession();
                 }
                 // 定时器执行完后从数组中移除
